@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo — BoardVerse</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <header class="cabecera">
+        <div class="cabecera-cont">
+            <a href="index.html" class="logo">
+                <div class="logo-img">BV</div>
+                <span class="logo-texto">BoardVerse</span>
+            </a>
+
+            <button class="menu-btn" aria-label="Abrir menú" id="btnMenu">
+                <span></span>
+            </button>
+
+            <nav class="nav" id="navPrincipal">
+                <ul class="menu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="catalogo.html" class="activo">Catálogo</a></li>
+                    <li><a href="catalogo.html?cat=estrategia">Estrategia</a></li>
+                    <li><a href="catalogo.html?cat=familiar">Familiar</a></li>
+                    <li><a href="catalogo.html?cat=party">Party</a></li>
+                </ul>
+                <div class="acciones-cab">
+                    <a href="login.html" class="btn btn-borde btn-peq">Usuario</a>
+                    <a href="carrito.html" class="btn btn-amarillo btn-peq">Carro (0)</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+
+            <div class="catalogo-top">
+                <h1>Catálogo de juegos</h1>
+
+                <form class="filtros" id="formFiltros">
+                    <div class="busqueda">
+                        <input type="search" name="q" placeholder="Buscar por nombre...">
+                        <button type="submit" class="btn btn-azul">Buscar</button>
+                    </div>
+
+                    <label class="campo">
+                        <span class="etiqueta">Jugadores</span>
+                        <select name="jugadores">
+                            <option value="">Cualquiera</option>
+                            <option value="1-2">1-2</option>
+                            <option value="3-4">3-4</option>
+                            <option value="5+">5 o más</option>
+                        </select>
+                    </label>
+
+                    <label class="campo">
+                        <span class="etiqueta">Edad</span>
+                        <select name="edad">
+                            <option value="">Cualquiera</option>
+                            <option value="6">6+</option>
+                            <option value="8">8+</option>
+                            <option value="12">12+</option>
+                            <option value="16">16+</option>
+                        </select>
+                    </label>
+
+                    <label class="campo">
+                        <span class="etiqueta">Duración</span>
+                        <select name="duracion">
+                            <option value="">Cualquiera</option>
+                            <option value="30">≤ 30 min</option>
+                            <option value="60">30–60 min</option>
+                            <option value="120">60–120 min</option>
+                            <option value="120+">> 120 min</option>
+                        </select>
+                    </label>
+
+                    <label class="campo">
+                        <span class="etiqueta">Categoría</span>
+                        <select name="categoria">
+                            <option value="">Todas</option>
+                            <option value="estrategia">Estrategia</option>
+                            <option value="familiar">Familiar</option>
+                            <option value="party">Party</option>
+                            <option value="cooperativo">Cooperativo</option>
+                        </select>
+                    </label>
+
+                    <label class="campo">
+                        <span class="etiqueta">Precio máx.</span>
+                        <select name="precio">
+                            <option value="">Sin límite</option>
+                            <option value="20">Hasta 20 €</option>
+                            <option value="40">Hasta 40 €</option>
+                            <option value="60">Hasta 60 €</option>
+                            <option value="100">Hasta 100 €</option>
+                        </select>
+                    </label>
+                </form>
+            </div>
+
+            <section class="productos" id="gridProductos">
+
+                <article class="producto">
+                    <a href="producto.html?id=1" class="producto-img">Catan</a>
+                    <div class="producto-info">
+                        <h3 class="producto-nombre">Catan</h3>
+                        <div class="tags">
+                            <span class="tag">3-4 jug.</span>
+                            <span class="tag">90 min</span>
+                            <span class="tag">10+</span>
+                        </div>
+                        <span class="producto-precio">39,95 €</span>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <a href="producto.html?id=2" class="producto-img">Carcassonne</a>
+                    <div class="producto-info">
+                        <h3 class="producto-nombre">Carcassonne</h3>
+                        <div class="tags">
+                            <span class="tag">2-5 jug.</span>
+                            <span class="tag">45 min</span>
+                            <span class="tag">7+</span>
+                        </div>
+                        <span class="producto-precio">29,90 €</span>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <a href="producto.html?id=3" class="producto-img">Terraforming Mars</a>
+                    <div class="producto-info">
+                        <h3 class="producto-nombre">Terraforming Mars</h3>
+                        <div class="tags">
+                            <span class="tag">1-5 jug.</span>
+                            <span class="tag">120 min</span>
+                            <span class="tag">12+</span>
+                        </div>
+                        <span class="producto-precio">59,95 €</span>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <a href="producto.html?id=4" class="producto-img">Dixit</a>
+                    <div class="producto-info">
+                        <h3 class="producto-nombre">Dixit</h3>
+                        <div class="tags">
+                            <span class="tag">3-6 jug.</span>
+                            <span class="tag">30 min</span>
+                            <span class="tag">8+</span>
+                        </div>
+                        <span class="producto-precio">32,50 €</span>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <a href="producto.html?id=5" class="producto-img">Pandemic</a>
+                    <div class="producto-info">
+                        <h3 class="producto-nombre">Pandemic</h3>
+                        <div class="tags">
+                            <span class="tag">2-4 jug.</span>
+                            <span class="tag">60 min</span>
+                            <span class="tag">10+</span>
+                        </div>
+                        <span class="producto-precio">42,00 €</span>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <a href="producto.html?id=6" class="producto-img">7 Wonders</a>
+                    <div class="producto-info">
+                        <h3 class="producto-nombre">7 Wonders</h3>
+                        <div class="tags">
+                            <span class="tag">3-7 jug.</span>
+                            <span class="tag">30 min</span>
+                            <span class="tag">10+</span>
+                        </div>
+                        <span class="producto-precio">49,95 €</span>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <a href="producto.html?id=7" class="producto-img">Ticket to Ride</a>
+                    <div class="producto-info">
+                        <h3 class="producto-nombre">Ticket to Ride</h3>
+                        <div class="tags">
+                            <span class="tag">2-5 jug.</span>
+                            <span class="tag">60 min</span>
+                            <span class="tag">8+</span>
+                        </div>
+                        <span class="producto-precio">44,90 €</span>
+                    </div>
+                </article>
+
+                <article class="producto">
+                    <a href="producto.html?id=8" class="producto-img">Azul</a>
+                    <div class="producto-info">
+                        <h3 class="producto-nombre">Azul</h3>
+                        <div class="tags">
+                            <span class="tag">2-4 jug.</span>
+                            <span class="tag">45 min</span>
+                            <span class="tag">8+</span>
+                        </div>
+                        <span class="producto-precio">36,95 €</span>
+                    </div>
+                </article>
+
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="pie">
+        <div class="pie-bottom">
+            &copy; 2026 BoardVerse · Proyecto Intermodular DAW · Florida Universitària
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

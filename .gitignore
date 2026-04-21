@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+
+# Logs y temporales
+*.log
+npm-debug.log*
+*.tmp
+*.bak
+
+# Dependencias / builds (por si se añaden en el futuro)
+node_modules/
+dist/
+build/
+
+# Secretos / entornos
+.env
+.env.local
