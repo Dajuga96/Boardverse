@@ -42,7 +42,7 @@
             <section class="hero">
                 <h1>Tu próxima partida empieza aquí</h1>
                 <p>Descubre los mejores juegos de mesa con filtros pensados para jugadores: número de jugadores, duración, edad y dificultad.</p>
-                <a href="catalogo.html" class="btn btn-amarillo">Explorar catálogo</a>
+                <a href="index.php?accion=catalogo" class="btn btn-amarillo">Explorar catálogo</a>
             </section>
 
             <section class="seccion">

@@ -28,8 +28,8 @@
                     <li><a href="catalogo.html?cat=party">Party</a></li>
                 </ul>
                 <div class="acciones-cab">
-                    <a href="login.html" class="btn btn-borde btn-peq">Usuario</a>
-                    <a href="carrito.html" class="btn btn-amarillo btn-peq">Carro (0)</a>
+                    <a href="login.html" class="btn btn-borde btn-peq">Iniciar sesión</a>
+                    <a href="carrito.html" class="btn btn-amarillo btn-peq">Carrito (0)</a>
                 </div>
             </nav>
         </div>
@@ -106,7 +106,7 @@
             <section class="productos" id="gridProductos">
                 <?php foreach ($productos as $producto): ?>
                     <article class="producto">
-                        <a href="producto.html?id=<?php echo $producto->getId(); ?>" class="producto-img"><?php echo $producto->getNombre(); ?></a>
+                        <a href="producto.php?id=<?php echo $producto->getId(); ?>" class="producto-img"><?php echo $producto->getNombre(); ?></a>
                         <div class="producto-info">
                             <h3 class="producto-nombre"><?php echo $producto->getNombre(); ?></h3>
                             <div class="tags">
