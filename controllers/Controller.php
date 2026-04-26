@@ -6,7 +6,12 @@ class Controller {
         $this->gestor = $gestor;
     }
 
-    public function index() {
-        include 'views/index.html';
+    public function main() {
+        include 'views/main.php';
+    }
+
+    public function catalogo() {
+        $productos = $this->gestor->obtenerProductos();
+        include 'views/catalogo.php';
     }
 }

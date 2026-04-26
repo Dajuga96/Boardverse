@@ -8,8 +8,12 @@ class Producto {
     private $precioDescuento;
     private $stock;
     private $descripcion;
+    private $numJugadoresMin;
+    private $numJugadoresMax;
+    private $duracion;
+    private $edad;
 
-    public function __construct($nombre, $distribuidora, $categoria, $precio, $precioDescuento, $stock, $descripcion, $id = null) {
+    public function __construct($nombre, $distribuidora, $categoria, $precio, $precioDescuento, $stock, $descripcion, $numJugadoresMin, $numJugadoresMax, $duracion, $edad, $id = null) {
         $this->nombre = $nombre;
         $this->distribuidora = $distribuidora;
         $this->categoria = $categoria;
@@ -17,6 +21,10 @@ class Producto {
         $this->precioDescuento = $precioDescuento;
         $this->stock = $stock;
         $this->descripcion = $descripcion;
+        $this->numJugadoresMin = $numJugadoresMin;
+        $this->numJugadoresMax = $numJugadoresMax;
+        $this->duracion = $duracion;
+        $this->edad = $edad;
         $this->id = $id;
     }
 
@@ -79,5 +87,37 @@ class Producto {
 
     public function setDescripcion($descripcion) {
         $this->descripcion = $descripcion;
+    }
+
+    public function getNumJugadoresMin() {
+        return $this->numJugadoresMin;
+    }
+
+    public function setNumJugadoresMin($numJugadoresMin) {
+        $this->numJugadoresMin = $numJugadoresMin;
+    }
+
+    public function getNumJugadoresMax() {
+        return $this->numJugadoresMax;
+    }
+
+    public function setNumJugadoresMax($numJugadoresMax) {
+        $this->numJugadoresMax = $numJugadoresMax;
+    }
+
+    public function getDuracion() {
+        return $this->duracion;
+    }
+
+    public function setDuracion($duracion) {
+        $this->duracion = $duracion;
+    }
+
+    public function getEdad() {
+        return $this->edad;
+    }
+
+    public function setEdad($edad) {
+        $this->edad = $edad;
     }
 }

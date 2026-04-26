@@ -38,4 +38,16 @@ class GestorPDO {
         //Si no existe, devolvemos false o null
         return false;
     }
+
+    //Gestion de productos
+    public function obtenerProductos() {
+        $sql = "SELECT * FROM productos";
+        $stmt = $this->db->query($sql);
+        $arrayProductos = [];
+
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $arrayProductos[] = new Producto($row['nombre'], $row['distribuidora'], $row['categoria'], $row['precio'], $row['precio_descuento'], $row['stock'], $row['descripcion'], $row['num_jugadores_min'], $row['num_jugadores_max'], $row['duracion'], $row['edad'], $row['id_producto']);
+        }
+        return $arrayProductos;
+    }
 }

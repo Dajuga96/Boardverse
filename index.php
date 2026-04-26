@@ -1,5 +1,4 @@
 <?php
-
 require_once "autoload.php";
 
 $gestor = new GestorPDO();
@@ -25,6 +24,6 @@ switch ($accion) {
         $controller->index();
         break;
     default:
-        $controller->index();
+        $controller->main();
         break;
 }
