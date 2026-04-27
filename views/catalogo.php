@@ -23,9 +23,6 @@
                 <ul class="menu">
                     <li><a href="index.php">Inicio</a></li>
                     <li><a href="index.php?accion=catalogo" class="activo">Catálogo</a></li>
-                    <li><a href="catalogo.html?cat=estrategia">Estrategia</a></li>
-                    <li><a href="catalogo.html?cat=familiar">Familiar</a></li>
-                    <li><a href="catalogo.html?cat=party">Party</a></li>
                 </ul>
                 <div class="acciones-cab">
                     <a href="login.html" class="btn btn-borde btn-peq">Iniciar sesión</a>
