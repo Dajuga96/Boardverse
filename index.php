@@ -13,15 +13,6 @@ switch ($accion) {
     case 'producto':
         $controller->producto();
         break;
-    case 'estrategia':
-        $controller->index();
-        break;
-    case 'familiar':
-        $controller->index();
-        break;
-    case 'party':
-        $controller->index();
-        break;
     default:
         $controller->main();
         break;
