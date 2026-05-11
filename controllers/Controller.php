@@ -12,7 +12,15 @@ class Controller {
     }
 
     public function catalogo() {
-        $productos = $this->gestor->obtenerProductos();
+        $filtros = [
+            'q'         => $_GET['q']         ?? '',
+            'jugadores' => $_GET['jugadores'] ?? '',
+            'edad'      => $_GET['edad']      ?? '',
+            'duracion'  => $_GET['duracion']  ?? '',
+            'categoria' => $_GET['categoria'] ?? ($_GET['cat'] ?? ''),
+            'precio'    => $_GET['precio']    ?? '',
+        ];
+        $productos = $this->gestor->obtenerProductosFiltrados($filtros);
         include 'views/catalogo.php';
     }
 
@@ -27,7 +35,11 @@ class Controller {
             header('Location: index.php?accion=catalogo');
             exit;
         }
-        $relacionados = $this->gestor->obtenerProductos();
+        $relacionados = $this->gestor->obtenerRelacionados(
+            $producto->getId(),
+            $producto->getCategoria(),
+            4
+        );
         include 'views/producto.php';
     }
 
@@ -35,7 +47,6 @@ class Controller {
         $error = null;
         $tabActiva = 'login';
 
-        // Si llega un POST, procesar el login
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = trim($_POST['email'] ?? '');
             $password = $_POST['password'] ?? '';
@@ -81,7 +92,6 @@ class Controller {
                 $hash = password_hash($password, PASSWORD_DEFAULT);
                 $nuevo = new Usuario($email, $hash);
                 if ($this->gestor->registrarUsuario($nuevo)) {
-                    // Auto-login tras registro
                     $usuario = $this->gestor->buscarUsuarioPorEmail($email);
                     $_SESSION['usuario'] = $usuario->getEmail();
                     $_SESSION['usuario_id'] = $usuario->getId();
@@ -109,6 +119,7 @@ class Controller {
 
     public function admin() {
         $productos = $this->gestor->obtenerProductos();
+        $usuarios  = $this->gestor->obtenerUsuarios();
         include 'views/admin.php';
     }
 }

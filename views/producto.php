@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catan — BoardVerse</title>
+    <title><?= htmlspecialchars($producto->getNombre()) ?> — BoardVerse</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -26,10 +26,10 @@
                 </ul>
                 <div class="acciones-cab">
                     <?php if (isset($_SESSION['usuario'])): ?>
-                    <span style="font-size:.875rem; color:var(--gris);">👤 <?= htmlspecialchars($_SESSION['usuario']) ?></span>
-                    <a href="index.php?accion=logout" class="btn btn-borde btn-peq">Cerrar sesión</a>
+                        <span style="font-size:.875rem; color:var(--gris);">👤 <?= htmlspecialchars($_SESSION['usuario']) ?></span>
+                        <a href="index.php?accion=logout" class="btn btn-borde btn-peq">Cerrar sesión</a>
                     <?php else: ?>
-                    <a href="index.php?accion=login" class="btn btn-borde btn-peq">Iniciar sesión</a>
+                        <a href="index.php?accion=login" class="btn btn-borde btn-peq">Iniciar sesión</a>
                     <?php endif; ?>
                     <a href="index.php?accion=carrito" class="btn btn-amarillo btn-peq">Carrito (0)</a>
                 </div>
@@ -43,40 +43,44 @@
             <nav class="mb-1" style="font-size:.875rem; color:var(--gris);">
                 <a href="index.php">Inicio</a> /
                 <a href="index.php?accion=catalogo">Catálogo</a> /
-                <span><?=$producto->getNombre()?></span>
+                <span><?= htmlspecialchars($producto->getNombre()) ?></span>
             </nav>
 
             <section class="ficha">
                 <div class="ficha-img">
-                    <span>Imagen del producto</span>
+                    <?php if ($producto->getImagen()): ?>
+                        <img src="img/<?= htmlspecialchars($producto->getImagen()) ?>" alt="<?= htmlspecialchars($producto->getNombre()) ?>" style="width:100%;height:100%;object-fit:cover;">
+                    <?php else: ?>
+                        <span>Imagen del producto</span>
+                    <?php endif; ?>
                 </div>
 
                 <div class="ficha-info">
-                    <h1 class="ficha-nombre"><?=$producto->getNombre()?></h1>
-                    <span class="ficha-precio"><?=$producto->getPrecio()?> €</span>
+                    <h1 class="ficha-nombre"><?= htmlspecialchars($producto->getNombre()) ?></h1>
+                    <span class="ficha-precio"><?= $producto->getPrecio() ?> €</span>
 
-                    <p class="ficha-desc"> <?=$producto->getDescripcion() ?></p>
+                    <p class="ficha-desc"><?= htmlspecialchars($producto->getDescripcion()) ?></p>
 
                     <div class="specs">
                         <div class="spec">
                             <span class="spec-label">Jugadores</span>
-                            <span class="spec-valor"><?=$producto->getNumJugadoresMin(); ?>-<?=$producto->getNumJugadoresMax(); ?></span>
+                            <span class="spec-valor"><?= $producto->getNumJugadoresMin(); ?>-<?= $producto->getNumJugadoresMax(); ?></span>
                         </div>
                         <div class="spec">
                             <span class="spec-label">Edad</span>
-                            <span class="spec-valor"><?=$producto->getEdad(); ?>+</span>
+                            <span class="spec-valor"><?= $producto->getEdad(); ?>+</span>
                         </div>
                         <div class="spec">
                             <span class="spec-label">Duración</span>
-                            <span class="spec-valor"><?=$producto->getDuracion(); ?> min</span>
+                            <span class="spec-valor"><?= $producto->getDuracion(); ?> min</span>
                         </div>
                         <div class="spec">
                             <span class="spec-label">Dificultad</span>
-                            <span class="spec-valor"><?=$producto->getDificultad(); ?></span>
+                            <span class="spec-valor"><?= htmlspecialchars($producto->getDificultad()); ?></span>
                         </div>
                         <div class="spec">
                             <span class="spec-label">Categoría</span>
-                            <span class="spec-valor"><?=$producto->getCategoria(); ?></span>
+                            <span class="spec-valor"><?= htmlspecialchars($producto->getCategoria()); ?></span>
                         </div>
                     </div>
 
@@ -94,44 +98,28 @@
                 </div>
             </section>
 
+            <?php if (!empty($relacionados)): ?>
             <section class="seccion">
                 <h2 class="titulo-seccion">Productos relacionados</h2>
                 <div class="productos">
-
-                    <article class="producto">
-                        <a href="index.php?accion=producto&id=2" class="producto-img">Carcassonne</a>
-                        <div class="producto-info">
-                            <h3 class="producto-nombre">Carcassonne</h3>
-                            <span class="producto-precio">29,90 €</span>
-                        </div>
-                    </article>
-
-                    <article class="producto">
-                        <a href="index.php?accion=producto&id=6" class="producto-img">7 Wonders</a>
-                        <div class="producto-info">
-                            <h3 class="producto-nombre">7 Wonders</h3>
-                            <span class="producto-precio">49,95 €</span>
-                        </div>
-                    </article>
-
-                    <article class="producto">
-                        <a href="index.php?accion=producto&id=7" class="producto-img">Ticket to Ride</a>
-                        <div class="producto-info">
-                            <h3 class="producto-nombre">Ticket to Ride</h3>
-                            <span class="producto-precio">44,90 €</span>
-                        </div>
-                    </article>
-
-                    <article class="producto">
-                        <a href="index.php?accion=producto&id=3" class="producto-img">Terraforming Mars</a>
-                        <div class="producto-info">
-                            <h3 class="producto-nombre">Terraforming Mars</h3>
-                            <span class="producto-precio">59,95 €</span>
-                        </div>
-                    </article>
-
+                    <?php foreach ($relacionados as $rel): ?>
+                        <article class="producto">
+                            <a href="index.php?accion=producto&id=<?= $rel->getId(); ?>" class="producto-img">
+                                <?php if ($rel->getImagen()): ?>
+                                    <img src="img/<?= htmlspecialchars($rel->getImagen()) ?>" alt="<?= htmlspecialchars($rel->getNombre()) ?>">
+                                <?php else: ?>
+                                    <?= htmlspecialchars($rel->getNombre()); ?>
+                                <?php endif; ?>
+                            </a>
+                            <div class="producto-info">
+                                <h3 class="producto-nombre"><?= htmlspecialchars($rel->getNombre()); ?></h3>
+                                <span class="producto-precio"><?= $rel->getPrecio(); ?> €</span>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
                 </div>
             </section>
+            <?php endif; ?>
 
         </div>
     </main>

@@ -76,16 +76,6 @@
         recalcular();
     }
 
-    const formFiltros = document.getElementById("formFiltros");
-    if (formFiltros) {
-        formFiltros.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const datos = new FormData(formFiltros);
-            const params = new URLSearchParams(datos).toString();
-            console.log("Filtros enviados:", params);
-        });
-    }
-
     document.querySelectorAll("[data-filtro]").forEach(btn => {
         btn.addEventListener("click", () => {
             document.querySelectorAll("[data-filtro]").forEach(b => b.classList.remove("activo"));

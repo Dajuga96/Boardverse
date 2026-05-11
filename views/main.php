@@ -27,10 +27,10 @@
                 </ul>
                 <div class="acciones-cab">
                     <?php if (isset($_SESSION['usuario'])): ?>
-                    <span style="font-size:.875rem; color:var(--gris);">👤 <?= htmlspecialchars($_SESSION['usuario']) ?></span>
-                    <a href="index.php?accion=logout" class="btn btn-borde btn-peq">Cerrar sesión</a>
+                        <span style="font-size:.875rem; color:var(--gris);">👤 <?= htmlspecialchars($_SESSION['usuario']) ?></span>
+                        <a href="index.php?accion=logout" class="btn btn-borde btn-peq">Cerrar sesión</a>
                     <?php else: ?>
-                    <a href="index.php?accion=login" class="btn btn-borde btn-peq">Iniciar sesión</a>
+                        <a href="index.php?accion=login" class="btn btn-borde btn-peq">Iniciar sesión</a>
                     <?php endif; ?>
                     <a href="index.php?accion=carrito" class="btn btn-amarillo btn-peq">Carrito (0)</a>
                 </div>
@@ -67,59 +67,30 @@
             <section class="seccion">
                 <h2 class="titulo-seccion">Productos destacados</h2>
                 <div class="productos">
-
-                    <article class="producto">
-                        <a href="index.php?accion=producto&id=1" class="producto-img">Catan</a>
-                        <div class="producto-info">
-                            <h3 class="producto-nombre">Catan</h3>
-                            <div class="tags">
-                                <span class="tag">3-4 jugadores</span>
-                                <span class="tag">90 min</span>
+                    <?php
+                    // Muestra los primeros 4 productos como "destacados"
+                    $destacados = array_slice($productos ?? [], 0, 4);
+                    foreach ($destacados as $p):
+                    ?>
+                        <article class="producto">
+                            <a href="index.php?accion=producto&id=<?= $p->getId() ?>" class="producto-img">
+                                <?php if ($p->getImagen()): ?>
+                                    <img src="img/<?= htmlspecialchars($p->getImagen()) ?>" alt="<?= htmlspecialchars($p->getNombre()) ?>">
+                                <?php else: ?>
+                                    <?= htmlspecialchars($p->getNombre()) ?>
+                                <?php endif; ?>
+                            </a>
+                            <div class="producto-info">
+                                <h3 class="producto-nombre"><?= htmlspecialchars($p->getNombre()) ?></h3>
+                                <div class="tags">
+                                    <span class="tag"><?= $p->getNumJugadoresMin() ?>-<?= $p->getNumJugadoresMax() ?> jugadores</span>
+                                    <span class="tag"><?= $p->getDuracion() ?> min</span>
+                                </div>
+                                <span class="producto-precio"><?= $p->getPrecio() ?> €</span>
+                                <a href="index.php?accion=producto&id=<?= $p->getId() ?>" class="btn btn-azul btn-peq">Ver detalles</a>
                             </div>
-                            <span class="producto-precio">39,95 €</span>
-                            <button class="btn btn-azul btn-peq">Añadir al carrito</button>
-                        </div>
-                    </article>
-
-                    <article class="producto">
-                        <a href="index.php?accion=producto&id=2" class="producto-img">Carcassonne</a>
-                        <div class="producto-info">
-                            <h3 class="producto-nombre">Carcassonne</h3>
-                            <div class="tags">
-                                <span class="tag">2-5 jugadores</span>
-                                <span class="tag">45 min</span>
-                            </div>
-                            <span class="producto-precio">29,90 €</span>
-                            <button class="btn btn-azul btn-peq">Añadir al carrito</button>
-                        </div>
-                    </article>
-
-                    <article class="producto">
-                        <a href="index.php?accion=producto&id=3" class="producto-img">Terraforming Mars</a>
-                        <div class="producto-info">
-                            <h3 class="producto-nombre">Terraforming Mars</h3>
-                            <div class="tags">
-                                <span class="tag">1-5 jugadores</span>
-                                <span class="tag">120 min</span>
-                            </div>
-                            <span class="producto-precio">59,95 €</span>
-                            <button class="btn btn-azul btn-peq">Añadir al carrito</button>
-                        </div>
-                    </article>
-
-                    <article class="producto">
-                        <a href="index.php?accion=producto&id=4" class="producto-img">Dixit</a>
-                        <div class="producto-info">
-                            <h3 class="producto-nombre">Dixit</h3>
-                            <div class="tags">
-                                <span class="tag">3-6 jugadores</span>
-                                <span class="tag">30 min</span>
-                            </div>
-                            <span class="producto-precio">32,50 €</span>
-                            <button class="btn btn-azul btn-peq">Añadir al carrito</button>
-                        </div>
-                    </article>
-
+                        </article>
+                    <?php endforeach; ?>
                 </div>
             </section>
 
@@ -134,10 +105,10 @@
             </div>
             <div>
                 <h4>Categorías</h4>
-                <a href="index.php?accion=catalogo&cat=estrategia">Estrategia</a>
-                <a href="index.php?accion=catalogo&cat=familiar">Familiar</a>
-                <a href="index.php?accion=catalogo&cat=party">Party</a>
-                <a href="index.php?accion=catalogo&cat=cooperativo">Cooperativos</a>
+                <a href="index.php?accion=catalogo&cat=Estrategia">Estrategia</a>
+                <a href="index.php?accion=catalogo&cat=Familiar">Familiar</a>
+                <a href="index.php?accion=catalogo&cat=Party">Party</a>
+                <a href="index.php?accion=catalogo&cat=Cooperativo">Cooperativos</a>
             </div>
             <div>
                 <h4>Ayuda</h4>
@@ -148,8 +119,12 @@
             </div>
             <div>
                 <h4>Cuenta</h4>
-                <a href="index.php?accion=login">Iniciar sesión</a>
-                <a href="index.php?accion=login#registro">Registrarse</a>
+                <?php if (isset($_SESSION['usuario'])): ?>
+                    <a href="index.php?accion=logout">Cerrar sesión</a>
+                <?php else: ?>
+                    <a href="index.php?accion=login">Iniciar sesión</a>
+                    <a href="index.php?accion=login">Registrarse</a>
+                <?php endif; ?>
                 <a href="index.php?accion=admin">Panel admin</a>
             </div>
         </div>
