@@ -1,3 +1,4 @@
+<?php $tabActiva = $tabActiva ?? 'login'; ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -10,14 +11,14 @@
 
     <header class="cabecera">
         <div class="cabecera-cont">
-            <a href="index.html" class="logo">
+            <a href="index.php" class="logo">
                 <div class="logo-img">BV</div>
                 <span class="logo-texto">BoardVerse</span>
             </a>
             <nav class="nav">
                 <ul class="menu">
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="catalogo.html">Catálogo</a></li>
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="index.php?accion=catalogo">Catálogo</a></li>
                 </ul>
             </nav>
         </div>
@@ -29,11 +30,17 @@
                 <h1>Mi cuenta</h1>
 
                 <div class="tabs">
-                    <button type="button" class="activo" data-tab="login">Inicio sesión</button>
-                    <button type="button" data-tab="registro">Registrarse</button>
+                    <button type="button" class="<?= $tabActiva === 'login' ? 'activo' : '' ?>" data-tab="login">Inicio sesión</button>
+                    <button type="button" class="<?= $tabActiva === 'registro' ? 'activo' : '' ?>" data-tab="registro">Registrarse</button>
                 </div>
 
-                <form class="form" id="formLogin" data-panel="login">
+                <?php if (!empty($error)): ?>
+                    <div style="background:#fde2e2; border:1px solid #c62828; color:#8b1c1c; padding:.75rem 1rem; border-radius:.5rem; margin-bottom:1rem; font-size:.9rem;">
+                        <?= htmlspecialchars($error) ?>
+                    </div>
+                <?php endif; ?>
+
+                <form class="form <?= $tabActiva === 'login' ? '' : 'oculto' ?>" id="formLogin" data-panel="login" method="POST" action="index.php?accion=login">
                     <div class="campo">
                         <label for="login-email">Email</label>
                         <input class="input" type="email" id="login-email" name="email" required placeholder="tu@email.com">
@@ -49,10 +56,10 @@
                     <button type="submit" class="btn btn-azul btn-full">Entrar</button>
                 </form>
 
-                <form class="form oculto" id="formRegistro" data-panel="registro">
+                <form class="form <?= $tabActiva === 'registro' ? '' : 'oculto' ?>" id="formRegistro" data-panel="registro" method="POST" action="index.php?accion=registro">
                     <div class="campo">
                         <label for="reg-name">Nombre de usuario</label>
-                        <input class="input" type="text" id="reg-name" name="username" required minlength="3">
+                        <input class="input" type="text" id="reg-name" name="username" minlength="3">
                     </div>
 
                     <div class="campo">

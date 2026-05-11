@@ -26,8 +26,13 @@
                     <li><a href="index.php?accion=catalogo">Catálogo</a></li>
                 </ul>
                 <div class="acciones-cab">
-                    <a href="login.html" class="btn btn-borde btn-peq">Iniciar sesión</a>
-                    <a href="carrito.html" class="btn btn-amarillo btn-peq">Carrito (0)</a>
+                    <?php if (isset($_SESSION['usuario'])): ?>
+                    <span style="font-size:.875rem; color:var(--gris);">👤 <?= htmlspecialchars($_SESSION['usuario']) ?></span>
+                    <a href="index.php?accion=logout" class="btn btn-borde btn-peq">Cerrar sesión</a>
+                    <?php else: ?>
+                    <a href="index.php?accion=login" class="btn btn-borde btn-peq">Iniciar sesión</a>
+                    <?php endif; ?>
+                    <a href="index.php?accion=carrito" class="btn btn-amarillo btn-peq">Carrito (0)</a>
                 </div>
             </nav>
         </div>
@@ -64,7 +69,7 @@
                 <div class="productos">
 
                     <article class="producto">
-                        <a href="producto.html?id=1" class="producto-img">Catan</a>
+                        <a href="index.php?accion=producto&id=1" class="producto-img">Catan</a>
                         <div class="producto-info">
                             <h3 class="producto-nombre">Catan</h3>
                             <div class="tags">
@@ -77,7 +82,7 @@
                     </article>
 
                     <article class="producto">
-                        <a href="producto.html?id=2" class="producto-img">Carcassonne</a>
+                        <a href="index.php?accion=producto&id=2" class="producto-img">Carcassonne</a>
                         <div class="producto-info">
                             <h3 class="producto-nombre">Carcassonne</h3>
                             <div class="tags">
@@ -90,7 +95,7 @@
                     </article>
 
                     <article class="producto">
-                        <a href="producto.html?id=3" class="producto-img">Terraforming Mars</a>
+                        <a href="index.php?accion=producto&id=3" class="producto-img">Terraforming Mars</a>
                         <div class="producto-info">
                             <h3 class="producto-nombre">Terraforming Mars</h3>
                             <div class="tags">
@@ -103,7 +108,7 @@
                     </article>
 
                     <article class="producto">
-                        <a href="producto.html?id=4" class="producto-img">Dixit</a>
+                        <a href="index.php?accion=producto&id=4" class="producto-img">Dixit</a>
                         <div class="producto-info">
                             <h3 class="producto-nombre">Dixit</h3>
                             <div class="tags">
@@ -129,10 +134,10 @@
             </div>
             <div>
                 <h4>Categorías</h4>
-                <a href="catalogo.html?cat=estrategia">Estrategia</a>
-                <a href="catalogo.html?cat=familiar">Familiar</a>
-                <a href="catalogo.html?cat=party">Party</a>
-                <a href="catalogo.html?cat=cooperativo">Cooperativos</a>
+                <a href="index.php?accion=catalogo&cat=estrategia">Estrategia</a>
+                <a href="index.php?accion=catalogo&cat=familiar">Familiar</a>
+                <a href="index.php?accion=catalogo&cat=party">Party</a>
+                <a href="index.php?accion=catalogo&cat=cooperativo">Cooperativos</a>
             </div>
             <div>
                 <h4>Ayuda</h4>
@@ -143,9 +148,9 @@
             </div>
             <div>
                 <h4>Cuenta</h4>
-                <a href="login.html">Iniciar sesión</a>
-                <a href="login.html#registro">Registrarse</a>
-                <a href="admin.html">Panel admin</a>
+                <a href="index.php?accion=login">Iniciar sesión</a>
+                <a href="index.php?accion=login#registro">Registrarse</a>
+                <a href="index.php?accion=admin">Panel admin</a>
             </div>
         </div>
         <div class="pie-bottom">

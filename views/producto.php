@@ -25,8 +25,13 @@
                     <li><a href="index.php?accion=catalogo">Catálogo</a></li>
                 </ul>
                 <div class="acciones-cab">
-                    <a href="login.html" class="btn btn-borde btn-peq">Iniciar sesión</a>
-                    <a href="carrito.html" class="btn btn-amarillo btn-peq">Carrito (0)</a>
+                    <?php if (isset($_SESSION['usuario'])): ?>
+                    <span style="font-size:.875rem; color:var(--gris);">👤 <?= htmlspecialchars($_SESSION['usuario']) ?></span>
+                    <a href="index.php?accion=logout" class="btn btn-borde btn-peq">Cerrar sesión</a>
+                    <?php else: ?>
+                    <a href="index.php?accion=login" class="btn btn-borde btn-peq">Iniciar sesión</a>
+                    <?php endif; ?>
+                    <a href="index.php?accion=carrito" class="btn btn-amarillo btn-peq">Carrito (0)</a>
                 </div>
             </nav>
         </div>
@@ -94,7 +99,7 @@
                 <div class="productos">
 
                     <article class="producto">
-                        <a href="producto.html?id=2" class="producto-img">Carcassonne</a>
+                        <a href="index.php?accion=producto&id=2" class="producto-img">Carcassonne</a>
                         <div class="producto-info">
                             <h3 class="producto-nombre">Carcassonne</h3>
                             <span class="producto-precio">29,90 €</span>
@@ -102,7 +107,7 @@
                     </article>
 
                     <article class="producto">
-                        <a href="producto.html?id=6" class="producto-img">7 Wonders</a>
+                        <a href="index.php?accion=producto&id=6" class="producto-img">7 Wonders</a>
                         <div class="producto-info">
                             <h3 class="producto-nombre">7 Wonders</h3>
                             <span class="producto-precio">49,95 €</span>
@@ -110,7 +115,7 @@
                     </article>
 
                     <article class="producto">
-                        <a href="producto.html?id=7" class="producto-img">Ticket to Ride</a>
+                        <a href="index.php?accion=producto&id=7" class="producto-img">Ticket to Ride</a>
                         <div class="producto-info">
                             <h3 class="producto-nombre">Ticket to Ride</h3>
                             <span class="producto-precio">44,90 €</span>
@@ -118,7 +123,7 @@
                     </article>
 
                     <article class="producto">
-                        <a href="producto.html?id=3" class="producto-img">Terraforming Mars</a>
+                        <a href="index.php?accion=producto&id=3" class="producto-img">Terraforming Mars</a>
                         <div class="producto-info">
                             <h3 class="producto-nombre">Terraforming Mars</h3>
                             <span class="producto-precio">59,95 €</span>

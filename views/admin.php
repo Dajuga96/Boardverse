@@ -10,14 +10,14 @@
 
     <header class="cabecera">
         <div class="cabecera-cont">
-            <a href="index.html" class="logo">
+            <a href="index.php" class="logo">
                 <div class="logo-img">BV</div>
                 <span class="logo-texto">BoardVerse · Admin</span>
             </a>
             <nav class="nav">
                 <div class="acciones-cab">
                     <span style="font-size:.875rem; color:var(--gris);">👤 Admin</span>
-                    <a href="login.html" class="btn btn-borde btn-peq">Cerrar sesión</a>
+                    <a href="index.php?accion=login" class="btn btn-borde btn-peq">Cerrar sesión</a>
                 </div>
             </nav>
         </div>

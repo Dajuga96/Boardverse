@@ -10,7 +10,7 @@
 
     <header class="cabecera">
         <div class="cabecera-cont">
-            <a href="index.html" class="logo">
+            <a href="index.php" class="logo">
                 <div class="logo-img">BV</div>
                 <span class="logo-texto">BoardVerse</span>
             </a>
@@ -21,14 +21,19 @@
 
             <nav class="nav" id="navPrincipal">
                 <ul class="menu">
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="catalogo.html">Catálogo</a></li>
-                    <li><a href="catalogo.html?cat=estrategia">Estrategia</a></li>
-                    <li><a href="catalogo.html?cat=familiar">Familiar</a></li>
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="index.php?accion=catalogo">Catálogo</a></li>
+                    <li><a href="index.php?accion=catalogo&cat=estrategia">Estrategia</a></li>
+                    <li><a href="index.php?accion=catalogo&cat=familiar">Familiar</a></li>
                 </ul>
                 <div class="acciones-cab">
-                    <a href="login.html" class="btn btn-borde btn-peq">Usuario</a>
-                    <a href="carrito.html" class="btn btn-amarillo btn-peq">Carro (0)</a>
+                    <?php if (isset($_SESSION['usuario'])): ?>
+                    <span style="font-size:.875rem; color:var(--gris);">👤 <?= htmlspecialchars($_SESSION['usuario']) ?></span>
+                    <a href="index.php?accion=logout" class="btn btn-borde btn-peq">Cerrar sesión</a>
+                    <?php else: ?>
+                    <a href="index.php?accion=login" class="btn btn-borde btn-peq">Iniciar sesión</a>
+                    <?php endif; ?>
+                    <a href="index.php?accion=carrito" class="btn btn-amarillo btn-peq">Carro (0)</a>
                 </div>
             </nav>
         </div>
@@ -38,7 +43,7 @@
         <div class="container">
 
             <nav class="mb-1" style="font-size:.875rem; color:var(--gris);">
-                <a href="index.html">Inicio</a> /
+                <a href="index.php">Inicio</a> /
                 <span>Carrito</span>
             </nav>
 
@@ -80,7 +85,7 @@
                         <span id="resumenTotal">0,00 €</span>
                     </div>
                     <button class="btn btn-azul btn-full" style="margin-top:1rem;">Finalizar compra</button>
-                    <a href="catalogo.html" class="btn btn-borde btn-full" style="margin-top:.5rem;">Seguir comprando</a>
+                    <a href="index.php?accion=catalogo" class="btn btn-borde btn-full" style="margin-top:.5rem;">Seguir comprando</a>
                 </div>
             </section>
 

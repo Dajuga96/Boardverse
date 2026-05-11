@@ -25,8 +25,13 @@
                     <li><a href="index.php?accion=catalogo" class="activo">Catálogo</a></li>
                 </ul>
                 <div class="acciones-cab">
-                    <a href="login.html" class="btn btn-borde btn-peq">Iniciar sesión</a>
-                    <a href="carrito.html" class="btn btn-amarillo btn-peq">Carrito (0)</a>
+                    <?php if (isset($_SESSION['usuario'])): ?>
+                    <span style="font-size:.875rem; color:var(--gris);">👤 <?= htmlspecialchars($_SESSION['usuario']) ?></span>
+                    <a href="index.php?accion=logout" class="btn btn-borde btn-peq">Cerrar sesión</a>
+                    <?php else: ?>
+                    <a href="index.php?accion=login" class="btn btn-borde btn-peq">Iniciar sesión</a>
+                    <?php endif; ?>
+                    <a href="index.php?accion=carrito" class="btn btn-amarillo btn-peq">Carrito (0)</a>
                 </div>
             </nav>
         </div>
