@@ -23,8 +23,7 @@
                 <ul class="menu">
                     <li><a href="index.php">Inicio</a></li>
                     <li><a href="index.php?accion=catalogo">Catálogo</a></li>
-                    <li><a href="index.php?accion=catalogo&cat=estrategia">Estrategia</a></li>
-                    <li><a href="index.php?accion=catalogo&cat=familiar">Familiar</a></li>
+                    
                 </ul>
                 <div class="acciones-cab">
                     <?php if (isset($_SESSION['usuario'])): ?>
@@ -33,8 +32,10 @@
                     <?php else: ?>
                     <a href="index.php?accion=login" class="btn btn-borde btn-peq">Iniciar sesión</a>
                     <?php endif; ?>
-                    <a href="index.php?accion=carrito" class="btn btn-amarillo btn-peq">Carro (0)</a>
-                </div>
+                    <a href="index.php?accion=carrito" class="btn btn-amarillo">
+                        Carrito (<?= Carrito::contar(); ?>)
+                    </a>
+                    </div>
             </nav>
         </div>
     </header>
@@ -62,9 +63,40 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php foreach ($carrito as $item): ?>
+                            <tr>
+                                <td>
+                                    <?= htmlspecialchars($item['nombre']) ?>
+                                </td>
+
+                                <td>
+                                    <?= number_format($item['precio'], 2, ',', '.') ?> €
+                                </td>
+
+                                <td>
+                                    <form method="POST" action="index.php?accion=actualizarCarrito" style="display:flex; gap:.5rem;">
+                                        <input type="hidden" name="id" value="<?= $item['id'] ?>">
+                                        <input class="input" type="number" name="cantidad" value="<?= $item['cantidad'] ?>" min="1" max="99" style="width:80px;">
+                                        <button class="btn btn-borde btn-peq" type="submit">Actualizar</button>
+                                    </form>
+                                </td>
+
+                                <td>
+                                    <?= number_format($item['precio'] * $item['cantidad'], 2, ',', '.') ?> €
+                                </td>
+
+                                <td>
+                                    <a class="btn btn-rojo btn-peq" href="index.php?accion=eliminarCarrito&id=<?= $item['id'] ?>">
+                                        Quitar
+                                    </a>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>    
                         </tbody>
                     </table>
-                    <p id="carritoVacio" style="padding:1rem; color:var(--gris);">El carrito está vacío.</p>
+                    <?php if (empty($carrito)): ?>
+                        <p style="padding:1rem; color:var(--gris);">El carrito está vacío.</p>
+                    <?php endif; ?>
                 </div>
             </section>
 
@@ -73,18 +105,20 @@
                     <h2>Resumen</h2>
                     <div style="display:flex; justify-content:space-between; margin:.5rem 0;">
                         <span>Subtotal</span>
-                        <span id="resumenSubtotal">0,00 €</span>
+                        <span><?= number_format($subtotal, 2, ',', '.') ?> €</span>
                     </div>
                     <div style="display:flex; justify-content:space-between; margin:.5rem 0;">
                         <span>Envío</span>
-                        <span>4,95 €</span>
+                        <span><?= number_format($envio, 2, ',', '.') ?> €</span>
                     </div>
                     <hr style="border:none; border-top:1px solid var(--borde); margin:.75rem 0;">
                     <div style="display:flex; justify-content:space-between; font-weight:700; font-size:1.125rem;">
                         <span>Total</span>
-                        <span id="resumenTotal">0,00 €</span>
+                        <span><?= number_format($total, 2, ',', '.') ?> €</span>
                     </div>
-                    <button class="btn btn-azul btn-full" style="margin-top:1rem;">Finalizar compra</button>
+                    <button class="btn btn-azul btn-full" onclick="finalizarCompra()">
+                    Finalizar compra
+                    </button>
                     <a href="index.php?accion=catalogo" class="btn btn-borde btn-full" style="margin-top:.5rem;">Seguir comprando</a>
                 </div>
             </section>
@@ -99,5 +133,13 @@
     </footer>
 
     <script src="js/app.js"></script>
+    <script>
+    function finalizarCompra() {
+
+        alert("✅ Tu compra ha sido completada con éxito 😊");
+
+        window.location.href = "index.php?accion=vaciarCarrito";
+    }
+</script>
 </body>
 </html>

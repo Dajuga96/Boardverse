@@ -113,13 +113,70 @@ class Controller {
         exit;
     }
 
-    public function carrito() {
-        include 'views/carrito.php';
-    }
-
     public function admin() {
         $productos = $this->gestor->obtenerProductos();
         $usuarios  = $this->gestor->obtenerUsuarios();
         include 'views/admin.php';
     }
+
+    public function agregarCarrito() {
+    $id = $_POST['id'] ?? null;
+    $cantidad = (int)($_POST['cantidad'] ?? 1);
+
+    if (!$id || $cantidad < 1) {
+        header('Location: ' . ($_SERVER['HTTP_REFERER'] ?? 'index.php?accion=catalogo'));
+    exit;
+    }
+
+    $producto = $this->gestor->buscarProducto($id);
+
+    if ($producto) {
+        Carrito::agregar($producto, $cantidad);
+    }
+
+    $volver = $_POST['volver'] ?? 'index.php?accion=catalogo';
+
+    header('Location: ' . $volver);
+    exit;
+    }
+
+    public function actualizarCarrito() {
+        $id = $_POST['id'] ?? null;
+        $cantidad = (int)($_POST['cantidad'] ?? 1);
+
+        if ($id) {
+            Carrito::actualizar($id, $cantidad);
+        }
+
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    exit;
+    }
+
+    public function eliminarCarrito() {
+        $id = $_GET['id'] ?? null;
+
+        if ($id) {
+            Carrito::eliminar($id);
+        }
+
+        header('Location: index.php?accion=carrito');
+        exit;
+    }
+
+    public function carrito() {
+        $carrito = Carrito::obtener();
+        $subtotal = Carrito::subtotal();
+        $envio = $subtotal > 0 ? 4.95 : 0;
+        $total = $subtotal + $envio;
+
+        include 'views/carrito.php';
+    }
+
+    public function vaciarCarrito() {
+
+    Carrito::vaciar();
+
+    header('Location: index.php?accion=carrito');
+    exit;
 }
+    }

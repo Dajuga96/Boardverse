@@ -44,7 +44,9 @@ $sel = function($name, $val) use ($f) {
                     <?php else: ?>
                         <a href="index.php?accion=login" class="btn btn-borde btn-peq">Iniciar sesión</a>
                     <?php endif; ?>
-                    <a href="index.php?accion=carrito" class="btn btn-amarillo btn-peq">Carrito (0)</a>
+                    <a href="index.php?accion=carrito" class="btn btn-amarillo">
+    Carrito (<?= Carrito::contar(); ?>)
+</a>
                 </div>
             </nav>
         </div>

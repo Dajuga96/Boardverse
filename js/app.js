@@ -83,13 +83,4 @@
         });
     });
 
-    const formComprar = document.getElementById("formComprar");
-    if (formComprar) {
-        formComprar.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const cant = formComprar.querySelector("#cant").value;
-            alert("Añadido al carrito (" + cant + " ud.)");
-        });
-    }
-
 })();

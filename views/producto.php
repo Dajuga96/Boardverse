@@ -31,7 +31,10 @@
                     <?php else: ?>
                         <a href="index.php?accion=login" class="btn btn-borde btn-peq">Iniciar sesión</a>
                     <?php endif; ?>
-                    <a href="index.php?accion=carrito" class="btn btn-amarillo btn-peq">Carrito (0)</a>
+                    <a href="index.php?accion=carrito" class="btn btn-amarillo">
+    Carrito (<?= Carrito::contar(); ?>)
+                    </a>
+
                 </div>
             </nav>
         </div>
@@ -84,14 +87,16 @@
                         </div>
                     </div>
 
-                    <form class="cantidad-fila" id="formComprar">
+                    <form class="cantidad-fila" method="POST" action="index.php?accion=agregarCarrito">
+                    <input type="hidden" name="id" value="<?= $producto->getId(); ?>">
+                    <input type="hidden" name="volver" value="index.php?accion=producto&id=<?= $producto->getId(); ?>">
                         <label class="etiqueta" for="cant">Cantidad</label>
                         <div class="cantidad">
                             <button type="button" data-qty="-1">−</button>
-                            <input type="number" id="cant" name="cant" value="1" min="1" max="99">
+                            <input type="number" id="cant" name="cantidad" value="1" min="1" max="99">
                             <button type="button" data-qty="+1">+</button>
                         </div>
-                        <button type="submit" class="btn btn-amarillo">Comprar</button>
+                        <button type="submit" class="btn btn-amarillo">Añadir al carrito</button>
                         <button type="button" class="btn btn-borde">♥ Favorito</button>
                     </form>
 
